@@ -2,7 +2,7 @@
 
 {% for ad in ads %}
 
-    <img width="100px" src="">
+    <img width="100px" src=" {{ ad.image.url }} ">
     <h3> {{ ad.title }} </h3>
     <p> {{ ad.description }} </p>
     <p> {{ ad.created_at }} </p>
