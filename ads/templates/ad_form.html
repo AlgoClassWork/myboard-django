@@ -1,8 +1,24 @@
-<h2>Добавить обьявление:</h2>
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить объявление</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
 
-<form method="post">
-    {% csrf_token %}
-    {{ form }}
-    <button> Сохранить </button>
-</form>
+<header>
+    <h2>Добавить объявление</h2>
+</header>
 
+<main class="form-container">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Сохранить</button>
+    </form>
+</main>
+
+</body>
+</html>

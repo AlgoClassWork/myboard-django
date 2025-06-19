@@ -24,10 +24,10 @@ from ads.views import ad_list, ad_create
 urlpatterns = [
     #http://127.0.0.1:8000/admin/
     path('admin/', admin.site.urls),
-    #http://127.0.0.1:8000
-    path('', ad_list ),
+    #http://127.0.0.1:8000/
+    path('', ad_list, name='home' ),
     #http://127.0.0.1:8000/add
-    path('add/', ad_create)
+    path('add/', ad_create, name='create_ad')
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

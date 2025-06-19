@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from ads.forms import AdForm
 from ads.models import Ad
@@ -10,5 +10,11 @@ def ad_list(request):
 
 #http://127.0.0.1:8000/add
 def ad_create(request):
-    form = AdForm()
-    return render(request, 'ad_form.html', {'form' : form} )
+    if request.method == 'POST':
+        form = AdForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+        return redirect('home')
+    if request.method == 'GET':
+        form = AdForm()
+        return render(request, 'ad_form.html', {'form' : form})

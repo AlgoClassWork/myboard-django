@@ -1,12 +1,29 @@
-<h1>Доска обьявлений</h1>
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Доска объявлений</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
 
-{% for ad in ads %}
+<header>
+    <h1>Доска объявлений</h1>
+</header>
 
-    <div>
-        <img width="100px" src=" {{ ad.image.url }} ">
-        <h3> {{ ad.title }} </h3>
-        <p> {{ ad.description }} </p>
-        <p> {{ ad.created_at }} </p>
-    </div>
+<main class="ads-grid">
+    {% for ad in ads %}
+    <article class="ad-card">
+        <img src="{{ ad.image.url }}" alt="{{ ad.title }}">
+        <div class="ad-content">
+            <h3>{{ ad.title }}</h3>
+            <p>{{ ad.description }}</p>
+            <time>{{ ad.created_at|date:"d.m.Y H:i" }}</time>
+        </div>
+    </article>
+    {% endfor %}
+</main>
 
-{% endfor %}
+</body>
+</html>
