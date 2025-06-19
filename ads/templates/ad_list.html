@@ -10,6 +10,7 @@
 
 <header>
     <h1>Доска объявлений</h1>
+    <a href=" {% url 'create_ad' %} "> Создать обьявление </a>
 </header>
 
 <main class="ads-grid">
@@ -20,6 +21,8 @@
             <h3>{{ ad.title }}</h3>
             <p>{{ ad.description }}</p>
             <time>{{ ad.created_at|date:"d.m.Y H:i" }}</time>
+            <a href="{% url 'delete_ad' ad.id %}"> Удалить </a>
+            <a href="{% url 'edit_ad' ad.id %}"> Редактировать </a>
         </div>
     </article>
     {% endfor %}

@@ -19,7 +19,7 @@ from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
 
-from ads.views import ad_list, ad_create
+from ads.views import ad_list, ad_create, ad_delete, ad_edit
 
 urlpatterns = [
     #http://127.0.0.1:8000/admin/
@@ -27,7 +27,11 @@ urlpatterns = [
     #http://127.0.0.1:8000/
     path('', ad_list, name='home' ),
     #http://127.0.0.1:8000/add
-    path('add/', ad_create, name='create_ad')
+    path('add/', ad_create, name='create_ad'),
+    #http://127.0.0.1:8000/delete/5
+    path('delete/<int:id>/', ad_delete, name='delete_ad'),
+    #http://127.0.0.1:8000/edit/10
+    path('edit/<int:id>/', ad_edit, name='edit_ad'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
