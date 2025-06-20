@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth import login
 
-from ads.forms import AdForm
+from ads.forms import AdForm, RegisterForm
 from ads.models import Ad
 
 #http://127.0.0.1:8000
@@ -37,3 +38,14 @@ def ad_edit(request, id):
         form = AdForm(instance=ad)
         return render(request, 'ad_form.html', {'form' : form})
     
+#http://127.0.0.1:8000/register
+def register(request):
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+        return redirect('home')
+    if request.method == 'GET':
+        form = RegisterForm()
+        return render(request, 'register.html', {'form' : form})
