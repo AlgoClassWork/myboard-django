@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
 
 from ads.forms import AdForm, RegisterForm
@@ -10,6 +11,7 @@ def ad_list(request):
     return render(request, 'ad_list.html', { 'ads' : ads } )
 
 #http://127.0.0.1:8000/add
+@login_required
 def ad_create(request):
     if request.method == 'POST':
         form = AdForm(request.POST, request.FILES)
@@ -21,12 +23,14 @@ def ad_create(request):
         return render(request, 'ad_form.html', {'form' : form})
 
 #http://127.0.0.1:8000/delete/5
+@login_required
 def ad_delete(request, id):
     ad = get_object_or_404(Ad, id=id)
     ad.delete()
     return redirect('home')
 
 #http://127.0.0.1:8000/edit/10
+@login_required
 def ad_edit(request, id):
     ad = get_object_or_404(Ad, id=id)
     if request.method == 'POST':
@@ -49,3 +53,10 @@ def register(request):
     if request.method == 'GET':
         form = RegisterForm()
         return render(request, 'register.html', {'form' : form})
+    
+#http://127.0.0.1:8000/my_ads
+@login_required
+def my_ads(request):
+    ads = Ad.objects.filter(author=request.user)
+    return render(request, 'my_ads.html', { 'ads' : ads } )
+    

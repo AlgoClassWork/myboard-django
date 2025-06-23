@@ -19,7 +19,7 @@ from django.urls import include, path
 from django.conf.urls.static import static
 from django.conf import settings
 
-from ads.views import ad_list, ad_create, ad_delete, ad_edit, register
+from ads.views import ad_list, ad_create, ad_delete, ad_edit, register, my_ads
 
 urlpatterns = [
     path('', include('django.contrib.auth.urls')),
@@ -35,6 +35,8 @@ urlpatterns = [
     path('edit/<int:id>/', ad_edit, name='edit_ad'),
     #http://127.0.0.1:8000/register
     path('register/', register, name='register'),
+    #http://127.0.0.1:8000/my_ads
+    path('my_ads/', my_ads, name='my_ads')
 
 ]
 

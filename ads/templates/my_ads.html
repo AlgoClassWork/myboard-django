@@ -9,19 +9,8 @@
 <body>
 
 <header>
-    <h1>Доска объявлений</h1>
-    {% if user.is_authenticated %}
-        <a href=" {% url 'create_ad' %} "> Создать обьявление </a>
-        <a href=" {% url 'my_ads' %} "> Мои обьявления </a>
-        <p>Привет {{user.username}}</p>
-        <form action="{% url 'logout' %}" method="post">
-            {% csrf_token %}
-            <button>Выйти</button>
-        </form>
-    {% else %}
-        <a href="{% url 'login' %}"> Войти </a>
-        <a href="{% url 'register' %}"> Регистрация </a>
-    {% endif %}
+    <h1>Ваши объявления</h1>
+    <a href="{% url 'home' %}"> Главная </a>
 </header>
 
 <main class="ads-grid">
@@ -33,6 +22,10 @@
             <p>{{ ad.description }}</p>
             <time>{{ ad.created_at|date:"d.m.Y H:i" }}</time>
             <p> Автор: {{ ad.author }} </p>
+            {% if user.is_authenticated %}
+                <a href="{% url 'delete_ad' ad.id %}"> Удалить </a>
+                <a href="{% url 'edit_ad' ad.id %}"> Редактировать </a>
+            {% endif %}
         </div>
     </article>
     {% endfor %}

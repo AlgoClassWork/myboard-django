@@ -7,7 +7,7 @@ from ads.models import Ad
 class AdForm(forms.ModelForm):
     class Meta:
         model = Ad
-        fields = ['title', 'description', 'image']
+        fields = ['author', 'title', 'description', 'image']
 
 class RegisterForm(UserCreationForm):
     class Meta:
